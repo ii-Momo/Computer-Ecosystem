@@ -20,6 +20,13 @@ The goal is to grow a coherent “mini computer” where every layer fits togeth
 
 ---
 
+## AI Usage Policy
+
+This project was developed with the assistance of AI-based tools for brainstorming, documentation refinement, and selective code optimization. All architectural decisions, integration, testing, and final validation were performed manually.
+AI tools were used as development assistants. All outputs were reviewed, tested, and validated before integration.
+
+---
+
 ## What’s inside
 
 This repository is organized as a small but complete computing ecosystem:
