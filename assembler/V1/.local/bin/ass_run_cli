@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage:
+  ass__run_cli <input.asm> <output.bin> 
+  ass_run_cli -h | --help
+
+Description:
+  Assembles a v1 .asm file into a flat .bin, then runs loadbin to report loading 
+  at base address 0x0000 , then runs the binary on the cpu emulator.
+
+Examples:
+  ass_run_cli examples/v1/demo.asm demo.bin 
+
+
+EOF
+}
+
+# Help option
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+# Check argument count
+if [[ $# -ne 2 ]]; then
+  echo "Error: expected 2 arguments, got $#." >&2
+  echo >&2
+  usage >&2
+  exit 2
+fi
+
+IN_ASM="$1"
+OUT_BIN="$2"
+
+# Basic file checks
+if [[ ! -f "$IN_ASM" ]]; then
+  echo "Error: input file not found: $IN_ASM" >&2
+  exit 2
+fi
+
+# Run assembler (NOTE: with your zip structure, module path is toolchain..., not src.toolchain...)
+python -m src.asm.cli "$IN_ASM" -o "$OUT_BIN"
+
+# Run loader
+python -m src.loadbin.cli "$OUT_BIN" --base 0x0000
+
+python -m emu.cli run --bin $2
+
+echo "OK"
