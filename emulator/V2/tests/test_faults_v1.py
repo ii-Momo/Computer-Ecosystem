@@ -3,7 +3,7 @@ import pytest
 from emu.cpu_state import reset_state, HaltReason
 from emu.memory import Memory
 from emu.faults import FaultCode
-from emu.executor_v1 import step
+from emu.executor_v2 import step
 
 def make_mem(program: bytes, start: int = 0x0000) -> Memory:
     mem = Memory.blank()
@@ -21,8 +21,8 @@ def test_illeagle_incoding():
     assert st.halt_reason == HaltReason.FAULT
     assert st.fault_info.code == FaultCode.ILLEGAL_ENCODING
 def test_reg_oob():
-    # MOV_RI R17 , 5          : 01 11 00 00 05 00 00 00, 
-    mem = make_mem(bytes.fromhex("01 11 00 00 05 00 00 00"))
+    # MOV_RI R18 , 5          : 01 12 00 00 05 00 00 00, 
+    mem = make_mem(bytes.fromhex("01 12 00 00 05 00 00 00"))
     st = reset_state()
     st.pc = 0x0000
     

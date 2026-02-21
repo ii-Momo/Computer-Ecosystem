@@ -8,7 +8,7 @@ from typing import Optional, Tuple
 
 from .cpu_state import reset_state
 from .decoder import decode_instruction
-from .executor_v1 import step
+from .executor_v2 import step
 from .memory import MEM_SIZE, Memory
 
 

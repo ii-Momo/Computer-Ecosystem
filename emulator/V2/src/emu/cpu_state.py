@@ -18,6 +18,8 @@ class CPUState:
     # v1: 16 x 64-bit GPRs, PC, Z flag, halted state, fault info.
     regs: List[int] = field(default_factory=lambda: [0] * 16)
     pc: int = 0x0000
+    sp: int = 0xFDFF
+    fp: int = 0xFDFF
     z: bool = False
 
     halted: bool = False

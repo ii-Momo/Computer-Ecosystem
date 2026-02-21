@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 #Zone Identifiers
-Zone.Identifier
+*:Zone.Identifier

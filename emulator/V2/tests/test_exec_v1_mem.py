@@ -2,7 +2,7 @@ import pytest
 
 from emu.cpu_state import reset_state, HaltReason
 from emu.memory import Memory
-from emu.executor_v1 import step
+from emu.executor_v2 import step
 
 def make_mem(program: bytes, start: int = 0x0000) -> Memory:
     mem = Memory.blank()
